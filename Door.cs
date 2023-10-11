@@ -4,31 +4,35 @@ namespace MazeGame
 {
     public class Door : IMapSite
     {
-        private IMapSite room1;
-        private IMapSite room2;
+        private Room room1;
+        private Room room2;
         private bool isOpen;
-        public Door(IMapSite room1, IMapSite room2, bool isOpen)
+        public Door(Room room1,Room room2)
         {
             this.room1 = room1;
             this.room2 = room2;
             this.isOpen = true;
         }
-        public IMapSite OtherSideFrom(IMapSite site)
+        public Room OtherSideFrom(Room site)
         {
-            if (site == room1)
+            if (site.RoomNumber == room1.RoomNumber)
             {
                 return room2;
             }
-            else
+            else if (site.RoomNumber==room2.RoomNumber)
             {
                 return room1;
             }
+            else
+            {
+                throw new ArgumentOutOfRangeException();
+            }
         }
-        public void OpenDoor()
+        private void OpenDoor()
         {
             isOpen = true;
         }
-        public void CloseDoor()
+        private void CloseDoor()
         {
             isOpen = false;
         }

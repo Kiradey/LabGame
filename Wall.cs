@@ -4,7 +4,7 @@ namespace MazeGame
 {
     public class Wall : IMapSite
     {
-        public void Enter()
+        public virtual void Enter()
         {
             Console.WriteLine("Вы не можете пройти через стену.");
         }

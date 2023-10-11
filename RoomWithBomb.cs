@@ -4,11 +4,17 @@ namespace MazeGame
 {
     public class RoomWithBomb : Room
     {
-        public RoomWithBomb(int roomNumber, bool hasBomb) : base(roomNumber, hasBomb) { }
+        private static Random rand = new Random();
+        public RoomWithBomb(int roomNumber) : base(roomNumber) { }
 
         public void Explode()
         {
-            Console.WriteLine($"Комната взорвана!");
+            if (rand.Next(2) == 1)
+            {
+                Console.WriteLine("Комната взорвана!");
+                SideInit.OfType<BombedWall>().ToList().ForEach(x => x.Explode());
+            }
+            base.Enter();
         }
     }
 
